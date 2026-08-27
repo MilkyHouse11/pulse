@@ -43,3 +43,17 @@ pulse/
 ├── .gitignore
 ├── .env
 └── README.md
+
+## Screenshots
+
+### Auth
+![Auth](./screenshots/auth.jpg)
+
+### Loading Page
+![Loading Page](./screenshots/loading-page.jpg)
+
+### Timer
+![Timer](./screenshots/timer.jpg)
+
+### Timer List
+![Timer List](./screenshots/timer-list.jpg)
