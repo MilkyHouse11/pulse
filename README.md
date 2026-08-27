@@ -57,7 +57,7 @@ pulse/
 
 ### Timer
 
-<img src="./screenshots/timer-pagejpg" width="300">
+<img src="./screenshots/timer-page.jpg" width="300">
 
 ### Timer List
 
