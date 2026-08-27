@@ -1,0 +1,607 @@
+@import url('general.css');
+
+:root {
+    --timer-background: var(--background);
+    --timer-primary: var(--primary);
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    background-color: var(--timer-background);
+    transition: background-color .3s ease;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+#lock {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+nav {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: max(12px, 2dvh) max(16px, 5vw);
+    flex: 0 0 auto;
+}
+
+#arrow-back,
+#lock-screen {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#arrow-back {
+    width: clamp(44px, 12vw, 70px);
+    height: clamp(44px, 12vw, 70px);
+}
+
+#arrow-back path {
+    fill: var(--timer-primary);
+}
+
+#lock-screen {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+#lock-screen svg {
+    width: clamp(55px, 15vw, 90px);
+    height: clamp(55px, 15vw, 90px);
+}
+
+#lock-shackle {
+    transition: transform .5s ease;
+}
+
+.close {
+    transform: rotate(1deg) translateY(-1vw);
+}
+
+#interval-name,
+#interval-type {
+    flex: 0 0 auto;
+    text-align: center;
+    color: var(--timer-primary);
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 600;
+}
+
+#interval-name {
+    font-size: clamp(30px, 10vw, 64px);
+    line-height: 1;
+    margin-top: clamp(2px, 1dvh, 10px);
+    margin-bottom: clamp(4px, 1dvh, 10px);
+}
+
+#interval-type {
+    font-size: clamp(22px, 7vw, 44px);
+    line-height: 1;
+    margin-top: 0;
+    margin-bottom: clamp(6px, 2dvh, 20px);
+}
+
+#timer {
+    position: relative;
+
+    width: min(88vw,
+            620px);
+
+    aspect-ratio: 1;
+
+    margin: 0 auto;
+
+    flex: 1 1 auto;
+
+    min-height: 0;
+    min-width: 0;
+
+    max-height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer-ring {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    transform: rotate(122deg);
+}
+
+.timer-ring__progress {
+    fill: none;
+    stroke: var(--timer-primary);
+    stroke-width: 7;
+    stroke-linecap: round;
+    stroke-dasharray: 220;
+}
+
+.timer-content {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    color: var(--timer-primary);
+}
+
+#total-time {
+    position: absolute;
+
+    top: 31%;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    margin: 0;
+
+    font-size: clamp(18px,
+            5.5vw,
+            36px);
+
+    font-weight: bold;
+    opacity: .7;
+
+    white-space: nowrap;
+}
+
+#interval-time {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    margin: 0;
+
+    font-size: clamp(28px,
+            9vw,
+            58px);
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#timer-actions {
+    width: 100%;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: clamp(8px,
+            4vw,
+            30px);
+
+    flex: 0 0 auto;
+
+    padding-top: clamp(8px,
+            2dvh,
+            20px);
+
+    padding-bottom: max(16px,
+            2dvh,
+            env(safe-area-inset-bottom));
+}
+
+#repeat {
+    display: none;
+}
+
+#next {
+    transform: rotate(180deg);
+}
+
+#previous svg,
+#repeat svg,
+#next svg {
+    width: clamp(65px,
+            22vw,
+            145px);
+
+    height: clamp(65px,
+            22vw,
+            145px);
+}
+
+#pause svg {
+    width: clamp(50px,
+            17vw,
+            105px);
+
+    height: clamp(50px,
+            17vw,
+            105px);
+}
+
+@media (orientation: portrait) {
+
+    #timer {
+        width: 88vw;
+        max-width: 620px;
+    }
+}
+
+@media (orientation: portrait) and (max-height: 700px) {
+
+    nav {
+        padding-top: 1dvh;
+        padding-bottom: 1dvh;
+    }
+
+    #interval-name {
+        font-size: clamp(28px,
+                9vw,
+                48px);
+
+        margin-top: 0;
+        margin-bottom: 3px;
+    }
+
+    #interval-type {
+        font-size: clamp(20px,
+                6vw,
+                34px);
+
+        margin-bottom: 4px;
+    }
+
+    #timer {
+        width: 82vw;
+    }
+
+    #total-time {
+        top: 31%;
+
+        font-size: clamp(16px,
+                5vw,
+                30px);
+    }
+
+    #interval-time {
+        font-size: clamp(26px,
+                8vw,
+                48px);
+    }
+
+    #timer-actions {
+        padding-top: 1dvh;
+
+        padding-bottom: max(12px,
+                1dvh,
+                env(safe-area-inset-bottom));
+    }
+}
+
+@media (orientation: portrait) and (min-height: 700px) and (max-height: 950px) {
+
+    #timer {
+        width: 88vw;
+    }
+
+    #total-time {
+        top: 31%;
+    }
+
+    #interval-time {
+        font-size: clamp(28px,
+                9vw,
+                58px);
+    }
+}
+
+@media (orientation: portrait) and (min-height: 950px) {
+
+    #interval-name {
+        font-size: clamp(34px,
+                8vw,
+                64px);
+    }
+
+    #interval-type {
+        font-size: clamp(24px,
+                5.5vw,
+                42px);
+    }
+
+    #timer {
+        width: 80vw;
+        max-width: 620px;
+    }
+
+    #total-time {
+        top: 31%;
+
+        font-size: clamp(20px,
+                4.5vw,
+                36px);
+    }
+
+    #interval-time {
+        font-size: clamp(30px,
+                6.5vw,
+                58px);
+    }
+
+    #timer-actions {
+        padding-bottom: max(16px,
+                2dvh,
+                env(safe-area-inset-bottom));
+    }
+}
+
+@media (orientation: landscape) {
+    nav {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        right: 0;
+        width: 50%;
+        padding: 2dvh 3vw;
+        box-sizing: border-box;
+        z-index: 10;
+    }
+
+    #arrow-back {
+        width: clamp(50px, 11dvh, 75px);
+        height: clamp(50px, 11dvh, 75px);
+    }
+
+    #lock-screen svg {
+        width: clamp(65px, 15dvh, 100px);
+        height: clamp(65px, 15dvh, 100px);
+    }
+
+    #interval-name,
+    #interval-type,
+    #timer-actions {
+        position: fixed;
+        left: 52%;
+        width: 48%;
+        box-sizing: border-box;
+    }
+
+    #interval-name {
+        top: 20%;
+        margin: 0;
+        padding: 0 2vw;
+
+        font-size: clamp(34px, 8dvh, 60px);
+        line-height: 1.1;
+    }
+
+    #interval-type {
+        top: 30%;
+        margin: 0;
+        padding: 0 2vw;
+
+        font-size: clamp(26px, 6dvh, 44px);
+        line-height: 1.1;
+    }
+
+    #timer {
+        position: fixed;
+        left: 25%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        width: min(96dvh, 49vw);
+        height: min(96dvh, 49vw);
+
+        max-width: none;
+        max-height: none;
+        margin: 0;
+    }
+
+    #total-time {
+        top: 30%;
+
+        font-size: clamp(
+            24px,
+            6dvh,
+            42px
+        );
+    }
+
+    #interval-time {
+        top: 50%;
+
+        font-size: clamp(
+            36px,
+            10dvh,
+            68px
+        );
+    }
+
+    #timer-actions {
+        top: 60%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        gap: clamp(
+            20px,
+            4dvh,
+            45px
+        );
+
+        padding: 0 1vw;
+    }
+
+    #previous svg,
+    #repeat svg,
+    #next svg {
+        width: clamp(
+            90px,
+            20dvh,
+            155px
+        );
+
+        height: clamp(
+            90px,
+            20dvh,
+            155px
+        );
+    }
+
+    #pause svg {
+        width: clamp(
+            70px,
+            15dvh,
+            115px
+        );
+
+        height: clamp(
+            70px,
+            15dvh,
+            115px
+        );
+    }
+
+    #repeat {
+        display: none;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 420px) {
+    nav {
+        padding: 1.5dvh 2.5vw;
+    }
+
+    #arrow-back {
+        width: clamp(48px, 12dvh, 65px);
+        height: clamp(48px, 12dvh, 65px);
+    }
+
+    #lock-screen svg {
+        width: clamp(60px, 16dvh, 85px);
+        height: clamp(60px, 16dvh, 85px);
+    }
+
+    #interval-name {
+        top: 19%;
+        font-size: clamp(
+            30px,
+            8dvh,
+            48px
+        );
+    }
+
+    #interval-type {
+        top: 30%;
+        font-size: clamp(
+            23px,
+            6dvh,
+            36px
+        );
+    }
+
+    #timer {
+        left: 25%;
+        top: 50%;
+
+        width: 96dvh;
+        height: 96dvh;
+    }
+
+    #total-time {
+        top: 30%;
+
+        font-size: clamp(
+            22px,
+            6dvh,
+            30px
+        );
+    }
+
+    #interval-time {
+        top: 50%;
+
+        font-size: clamp(
+            32px,
+            9dvh,
+            44px
+        );
+    }
+
+    #timer-actions {
+        top: 60%;
+
+        gap: clamp(
+            14px,
+            3dvh,
+            28px
+        );
+    }
+
+    #previous svg,
+    #repeat svg,
+    #next svg {
+        width: clamp(
+            75px,
+            20dvh,
+            115px
+        );
+
+        height: clamp(
+            75px,
+            20dvh,
+            115px
+        );
+    }
+
+    #pause svg {
+        width: clamp(
+            58px,
+            15dvh,
+            85px
+        );
+
+        height: clamp(
+            58px,
+            15dvh,
+            85px
+        );
+    }
+}

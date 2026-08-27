@@ -1,0 +1,25 @@
+@keyframes deleting {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100rem);
+    }
+}
+
+@keyframes adding {
+    from {
+        transform: translateX(-100rem);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.deleted {
+    animation: deleting .3s ease forwards;
+}
+
+.added {
+    animation: adding .3s ease forwards;
+}

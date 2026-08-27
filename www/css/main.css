@@ -1,0 +1,653 @@
+@import url('general.css');
+@import url('nav.css');
+@import url('card-animations.css');
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    min-height: 100dvh;
+    background-color: var(--background);
+    animation: slide-in .15s ease;
+
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    flex: 0 0 auto;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#title {
+    margin: 0;
+
+    color: var(--surface);
+
+    font-size: clamp(22px,
+            5vw,
+            36px);
+
+    line-height: 1.1;
+    font-weight: bold;
+}
+
+#logout {
+    position: relative;
+
+    z-index: 10000;
+
+    width: clamp(42px,
+            9vw,
+            60px);
+
+    height: clamp(42px,
+            9vw,
+            60px);
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: none;
+    border: none;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+#logout svg {
+    width: clamp(28px,
+            7vw,
+            42px);
+
+    height: clamp(28px,
+            7vw,
+            42px);
+}
+
+#timers {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding:
+        clamp(12px, 4vw, 30px) max(16px, 5vw) calc(clamp(90px, 24vw, 150px) + env(safe-area-inset-bottom));
+
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: clamp(14px,
+            4vw,
+            28px);
+
+    scrollbar-width: none;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+#timers::-webkit-scrollbar {
+    display: none;
+}
+
+.timer {
+    width: 100%;
+
+    background-color: var(--surface);
+
+    border-radius: clamp(20px,
+            6vw,
+            42px);
+
+    padding:
+        clamp(18px, 5vw, 32px) clamp(20px, 7vw, 42px);
+
+    flex: 0 0 auto;
+}
+
+.timer-header,
+.timer-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.timer-header {
+    gap: 12px;
+}
+
+.timer-title {
+    min-width: 0;
+    width: auto;
+    flex: 1;
+
+    margin: 0;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    color: var(--header);
+
+    font-size: clamp(21px,
+            6vw,
+            34px);
+
+    line-height: 1.1;
+    font-weight: bold;
+}
+
+.timer-actions {
+    flex: 0 0 auto;
+
+    display: flex;
+    align-items: center;
+
+    gap: clamp(6px,
+            2vw,
+            14px);
+}
+
+.edit-timer,
+.delete-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: none;
+    border: none;
+
+    padding: 0;
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.edit-timer svg,
+.delete-timer svg {
+    width: clamp(28px,
+            8vw,
+            44px);
+
+    height: clamp(28px,
+            8vw,
+            44px);
+}
+
+.delete-timer {
+    width: auto;
+}
+
+.timer-main {
+    padding:
+        clamp(12px, 3vw, 20px) 0 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: clamp(6px,
+            1.5vw,
+            10px);
+}
+
+.timer-work-time,
+.timer-rest-time {
+    width: fit-content;
+
+    margin: 0;
+
+    padding:
+        clamp(5px, 1.2vw, 8px) clamp(10px, 2.5vw, 16px);
+
+    border-radius: clamp(10px,
+            3vw,
+            18px);
+
+    font-size: clamp(14px,
+            3.5vw,
+            20px);
+
+    line-height: 1.2;
+
+    font-weight: bold;
+}
+
+.timer-work-time {
+    background-color: var(--primary-lighter);
+    color: var(--primary-darker);
+}
+
+.timer-rest-time {
+    background-color: var(--background-darker);
+    color: var(--primary);
+}
+
+.timer-footer {
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: clamp(14px,
+            3vw,
+            22px);
+}
+
+.timer-info {
+    min-width: 0;
+
+    margin: 0;
+
+    color: var(--header);
+
+    font-size: clamp(17px,
+            5vw,
+            27px);
+
+    line-height: 1.1;
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+.run-timer {
+    flex: 0 0 auto;
+
+    width: clamp(48px,
+            13vw,
+            72px);
+
+    height: clamp(48px,
+            13vw,
+            72px);
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    background-color: var(--primary);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.run-timer svg {
+    width: clamp(20px,
+            6vw,
+            34px);
+
+    height: clamp(22px,
+            6.5vw,
+            36px);
+}
+
+#empty {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1;
+
+    padding:
+        100px 20px 120px;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    pointer-events: none;
+}
+
+#empty p {
+    margin: 0;
+
+    max-width: 90%;
+
+    color: var(--background-darker);
+
+    font-size: clamp(28px,
+            9vw,
+            58px);
+
+    line-height: 1.1;
+    font-weight: bold;
+}
+
+#page-bottom {
+    position: fixed;
+
+    right: max(20px,
+            5vw);
+
+    bottom: max(20px,
+            3vh,
+            env(safe-area-inset-bottom));
+
+    z-index: 1000;
+}
+
+#create-timer {
+    width: clamp(60px,
+            16vw,
+            90px);
+
+    height: clamp(60px,
+            16vw,
+            90px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--primary);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, .15);
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+#create-timer svg {
+    width: 55%;
+    height: 55%;
+
+    padding: 0;
+}
+
+@media (orientation: portrait) and (max-height: 700px) {
+
+    nav {
+        padding-top: 10px;
+        padding-bottom: 8px;
+    }
+
+    #timers {
+        padding-top: 10px;
+
+        gap: 12px;
+
+        padding-bottom: 100px;
+    }
+
+    .timer {
+        padding:
+            16px 20px;
+    }
+
+    .timer-main {
+        padding-top: 10px;
+    }
+
+    .timer-footer {
+        margin-top: 12px;
+    }
+
+    #page-bottom {
+        bottom: max(14px,
+                2vh,
+                env(safe-area-inset-bottom));
+    }
+}
+
+@media (orientation: portrait) and (min-width: 600px) {
+
+    nav {
+        padding-left: 7vw;
+        padding-right: 7vw;
+    }
+
+    #timers {
+        padding-left: 7vw;
+        padding-right: 7vw;
+    }
+
+    #title {
+        font-size: clamp(28px,
+                4vw,
+                38px);
+    }
+
+    .timer-title {
+        font-size: clamp(24px,
+                4vw,
+                34px);
+    }
+
+    .timer-work-time,
+    .timer-rest-time {
+        font-size: clamp(15px,
+                2.5vw,
+                20px);
+    }
+
+    .timer-info {
+        font-size: clamp(18px,
+                3vw,
+                26px);
+    }
+
+    #create-timer {
+        width: clamp(68px,
+                10vw,
+                90px);
+
+        height: clamp(68px,
+                10vw,
+                90px);
+    }
+}
+
+@media (orientation: landscape) {
+
+    nav {
+        padding-top: max(12px, 2vh);
+        padding-bottom: max(12px, 2vh);
+    }
+
+    #title {
+        font-size: clamp(18px,
+                4dvh,
+                28px);
+    }
+
+    #logout {
+        width: clamp(40px,
+                8dvh,
+                56px);
+
+        height: clamp(40px,
+                8dvh,
+                56px);
+    }
+
+    #logout svg {
+        width: clamp(26px,
+                6dvh,
+                38px);
+
+        height: clamp(26px,
+                6dvh,
+                38px);
+    }
+
+     #timers {
+        width: 100%;
+        padding: 4dvh clamp(50px, 15vw, 180px) 100px;
+        gap: 2dvh;
+    }
+
+    .timer {
+        width: 100%;
+        border-radius: clamp(18px,
+                5dvh,
+                30px);
+
+        padding:
+            clamp(14px, 3dvh, 22px) clamp(20px, 4vw, 36px);
+    }
+
+    .timer-title {
+        font-size: clamp(20px,
+                5dvh,
+                30px);
+    }
+
+    .edit-timer svg,
+    .delete-timer svg {
+        width: clamp(26px,
+                7dvh,
+                38px);
+
+        height: clamp(26px,
+                7dvh,
+                38px);
+    }
+
+    .timer-main {
+        padding-top: 1.5dvh;
+
+        gap: 1dvh;
+    }
+
+    .timer-work-time,
+    .timer-rest-time {
+        padding:
+            .6dvh 1.5vw;
+
+        border-radius: 2dvh;
+
+        font-size: clamp(13px,
+                3dvh,
+                19px);
+    }
+
+    .timer-footer {
+        margin-top: 1.5dvh;
+    }
+
+    .timer-info {
+        font-size: clamp(16px,
+                4dvh,
+                24px);
+    }
+
+    .run-timer {
+        width: clamp(44px,
+                11dvh,
+                64px);
+
+        height: clamp(44px,
+                11dvh,
+                64px);
+    }
+
+    .run-timer svg {
+        width: clamp(19px,
+                5dvh,
+                30px);
+
+        height: clamp(20px,
+                5.5dvh,
+                32px);
+    }
+
+    #page-bottom {
+        right: 4vw;
+
+        bottom: max(16px,
+                3dvh,
+                env(safe-area-inset-bottom));
+    }
+
+    #create-timer {
+        width: clamp(58px,
+                14dvh,
+                80px);
+
+        height: clamp(58px,
+                14dvh,
+                80px);
+    }
+}
+
+@media (orientation: landscape) and (max-height: 450px) {
+
+    nav {
+        padding-top: 1dvh;
+        padding-bottom: 1dvh;
+    }
+
+    #timers {
+        padding-top: 2dvh;
+        padding-bottom: 80px;
+    }
+
+    .timer {
+        padding:
+            12px 20px;
+    }
+
+    .timer-title {
+        font-size: clamp(18px,
+                4.5dvh,
+                26px);
+    }
+
+    .timer-main {
+        padding-top: 1dvh;
+    }
+
+    .timer-footer {
+        margin-top: 1dvh;
+    }
+
+    #page-bottom {
+        right: 3vw;
+        bottom: max(10px,
+                1dvh,
+                env(safe-area-inset-bottom));
+    }
+
+    #create-timer {
+        width: clamp(52px,
+                13dvh,
+                68px);
+
+        height: clamp(52px,
+                13dvh,
+                68px);
+    }
+}

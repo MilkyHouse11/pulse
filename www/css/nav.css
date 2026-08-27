@@ -1,0 +1,6 @@
+nav {
+    background-color: var(--header);
+    display: flex;
+    justify-content: space-between;
+    padding: 3vw 5vw;
+}

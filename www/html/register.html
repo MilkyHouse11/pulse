@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="../css/auth.css">
+    <script src="../js/asGuest.js" defer></script>
+    <script src="../js/register.js" defer></script>
+</head>
+
+<body>
+    <div>
+        <h1 id="register-header">Создайте аккаунт</h1>
+        <form id="register">
+            <div id="error-message"></div>
+            <input type="text" id="email" placeholder="Почта">
+            <input type="password" id="password" placeholder="Пароль">
+            <input type="password" id="confirm-password" placeholder="Подтвердите пароль">
+            <button>
+                Зарегистрироваться
+            </button>
+            <a id="guest" href="main.html">Войти как гость</a>
+        </form>
+    </div>
+    <p id="switch">Уже есть аккаунт? <a href="login.html">Войти</a></p>
+</body>
+
+</html>

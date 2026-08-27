@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новый таймер</title>
+    <link rel="stylesheet" href="../css/create-timer.css">
+    <script src="https://unpkg.com/imask" defer></script>
+    <script src="../js/intervalActions/loadIntervals.js" type="module" defer></script>
+    <script src="../js/intervalActions/addInterval.js" type="module" defer></script>
+    <script src="../js/intervalActions/deleteInterval.js" type="module" defer></script>
+    <script src="../js/intervalActions/increaseDuration.js" type="module" defer></script>
+    <script src="../js/timerActions/createTimer.js" type="module" defer></script>
+</head>
+
+<body>
+    <div id="modal">
+        <div id="modal-content">
+            <button id="close-modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18" stroke="#333333" stroke-width="2" stroke-linecap="round" />
+                    <path d="M6 6L18 18" stroke="#333333" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+            <p>Введите название таймера</p>
+            <input id="timer-name" maxlength="20" type="text" value="Новый таймер">
+            <button id="confirm">
+                Подтвердить
+            </button>
+        </div>
+    </div>
+    <nav>
+        <div>
+            <a id="back" href="main.html">
+                <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12.3896 20.5834L21.2563 29.45L19 31.6667L6.33333 19L19 6.33337L21.2563 8.55004L12.3896 17.4167H31.6667V20.5834H12.3896Z"
+                        fill="var(--background)" />
+                </svg>
+
+            </a>
+            <p id="title">Новый таймер</p>
+        </div>
+    </nav>
+    <p id="timer-info">
+        1 Интервал • 00:00
+    </p>
+    <div id="page-bottom">
+        <button id="add-interval">
+            <svg width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="18.5" width="20" height="57" rx="5" fill="#D8F3DC" />
+                <rect x="57" y="18.5" width="20" height="57" rx="5" transform="rotate(90 57 18.5)" fill="#D8F3DC" />
+            </svg>
+
+        </button>
+        <button id="create-timer">
+            <svg width="58" height="41" viewBox="0 0 58 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 20L21 37L54 4" stroke="var(--background)" stroke-width="8" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M4 20L21 37L54 4" stroke="var(--background)" stroke-width="8" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+
+        </button>
+    </div>
+    <div id="intervals">
+    </div>
+</body>
+
+</html>

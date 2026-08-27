@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новый таймер</title>
+    <link rel="stylesheet" href="../css/timer.css">
+    <script src="cordova.js"></script>
+    <script type="module" defer>
+        import { Timer } from '../js/classes/timer.js'
+        await Timer.runTimer()
+    </script>
+    <script src="../js/lockScreen.js" defer></script>
+</head>
+
+<body>
+    <div id="lock"></div>
+    <nav>
+        <a href="main.html">
+            <svg id="arrow-back" width="38" height="38" viewBox="0 0 38 38" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M12.3896 20.5834L21.2563 29.45L19 31.6667L6.33333 19L19 6.33337L21.2563 8.55004L12.3896 17.4167H31.6667V20.5834H12.3896Z"
+                    fill="#D8F3DC" />
+            </svg>
+        </a>
+        <button id="lock-screen">
+            <svg width="100" height="100" viewBox="0 0 130 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M18.75 41.25H71.25C75.3921 41.25 78.75 44.6079 78.75 48.75V75C78.75 79.1421 75.3921 82.5 71.25 82.5H18.75C14.6079 82.5 11.25 79.1421 11.25 75V48.75C11.25 44.6079 14.6079 41.25 18.75 41.25Z"
+                    stroke="var(--timer-primary)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+                <path id="lock-shackle"
+                    d="M26.25 41.25V26.25C26.25 21.2772 28.2254 16.5081 31.7417 12.9917C35.2581 9.47544 40.0272 7.5 45 7.5C49.9728 7.5 54.7419 9.47544 58.2582 12.9917C61.7746 16.5081 63.75 21.2772 63.75 26.25V41.25"
+                    stroke="var(--timer-primary)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"
+                    transform="translate(15, -25) rotate(20)" />
+            </svg>
+        </button>
+    </nav>
+    <p id="interval-name">Интервал 1</p>
+    <p id="interval-type">Работа</p>
+    <div id="timer">
+        <svg class="timer-ring" viewBox="0 0 100 100">
+            <circle class="timer-ring__progress" cx="50" cy="50" r="43" />
+        </svg>
+
+        <div class="timer-content">
+            <p id="total-time">00:00</p>
+            <p id="interval-time">00:00</p>
+        </div>
+    </div>
+    <div id="timer-actions">
+        <button id="previous">
+            <svg width="160" height="145" viewBox="0 0 160 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M30 81.1603C23.3333 77.3112 23.3333 67.6888 30 63.8397L108.75 18.3734C115.417 14.5244 123.75 19.3357 123.75 27.0337L123.75 117.966C123.75 125.664 115.417 130.476 108.75 126.627L30 81.1603Z"
+                    fill="var(--timer-primary)" />
+                <rect y="18" width="15" height="108" rx="7.5" fill="var(--timer-primary)" />
+            </svg>
+        </button>
+        <button id="pause">
+            <svg width="70" height="108" viewBox="0 0 70 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="70" y="108" width="15" height="108" rx="7.5" transform="rotate(-180 70 108)"
+                    fill="var(--timer-primary)" />
+                <rect x="15" y="108" width="15" height="108" rx="7.5" transform="rotate(-180 15 108)"
+                    fill="var(--timer-primary)" />
+            </svg>
+        </button>
+        <button id="repeat">
+            <svg width="70" height="128" viewBox="0 0 48 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M23.7156 7.3061C35.4326 7.3061 44.9312 16.9326 44.9312 28.8073C44.9312 35.9546 41.49 42.2874 36.1954 46.1969M26.2115 2.49994L21.2196 7.55905L26.2115 12.6182M23.7156 50.3085C11.9985 50.3085 2.5 40.6821 2.5 28.8073C2.5 21.66 5.94109 15.327 11.2358 11.4176M21.2196 44.9964L26.2115 50.0555L21.2196 55.1146"
+                    stroke="var(--timer-primary)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+
+        </button>
+        <button id="next">
+            <svg width="160" height="145" viewBox="0 0 160 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M30 81.1603C23.3333 77.3112 23.3333 67.6888 30 63.8397L108.75 18.3734C115.417 14.5244 123.75 19.3357 123.75 27.0337L123.75 117.966C123.75 125.664 115.417 130.476 108.75 126.627L30 81.1603Z"
+                    fill="var(--timer-primary)" />
+                <rect y="18" width="15" height="108" rx="7.5" fill="var(--timer-primary)" />
+            </svg>
+        </button>
+    </div>
+</body>
+
+</html>

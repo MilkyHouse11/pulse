@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    --background: #EAF2FF;
+    --background-darker: #C9D9F2;
+
+    --surface: #FFFFFF;
+
+    --primary: #FF477E;
+    --primary-darker: #D92F61;
+    --primary-lighter: #FFD9E5;
+
+    --header: #36558C;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0%);
+    }
+}
+
+button:active {
+    transition: all 0.05s ease;
+    transform: scale(0.95);
+}
+
+a, button, select {
+    -webkit-tap-highlight-color: transparent;
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="../css/auth.css">
+    <script src="../js/asGuest.js" defer></script>
+    <script src="../js/login.js" type="module" defer></script>
+</head>
+
+<body>
+    <div>
+        <h1>Войдите в аккаунт</h1>
+        <form>
+            <div id="error-message"></div>
+            <input type="text" id="email" placeholder="Почта">
+            <input type="password" id="password" placeholder="Пароль">
+            <button>
+                Войти
+            </button>
+            <a id="guest" href="main.html">Войти как гость</a>
+        </form>
+    </div>
+    <p id="switch">Нет аккаунта? <a href="register.html">Зарегистрироваться</a></p>
+</body>
+
+</html>

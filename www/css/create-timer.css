@@ -1,0 +1,729 @@
+@import url('general.css');
+@import url('nav.css');
+@import url('card-animations.css');
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100dvh;
+    background-color: var(--background);
+    animation: slide-in ease .1s;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: calc(100px + env(safe-area-inset-bottom));
+}
+
+nav {
+    flex-shrink: 0;
+}
+
+nav div {
+    color: var(--background);
+    font-weight: bold;
+    font-size: clamp(20px, 5vw, 32px);
+    display: flex;
+    align-items: center;
+    gap: clamp(10px, 3vw, 20px);
+}
+
+#back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+#back svg {
+    width: clamp(42px, 9vw, 60px);
+    height: clamp(42px, 9vw, 60px);
+}
+
+#title {
+    color: var(--background);
+    font-size: clamp(20px, 5vw, 32px);
+    width: min(50vw, 400px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+    margin: 0;
+}
+
+#timer-info {
+    text-align: center;
+    font-size: clamp(25px, 8vw, 56px);
+    font-weight: 600;
+    color: var(--header);
+    padding: clamp(15px, 5vw, 35px) 20px 0;
+    margin: 0;
+}
+
+#intervals {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(14px, 5vw, 28px);
+    padding: clamp(18px, 5vw, 32px) 20px;
+    padding-bottom: 30px;
+}
+
+.interval {
+    width: min(100%, 560px);
+    background-color: var(--background-darker);
+    border-radius: clamp(22px, 6vw, 40px);
+    padding: clamp(20px, 6vw, 36px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 5vw, 30px);
+}
+
+.interval-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.interval-name {
+    min-width: 0;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: var(--header);
+    font-size: clamp(24px, 8vw, 44px);
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.interval-name:focus {
+    border: none;
+    outline: none;
+}
+
+.interval-actions {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 2vw, 14px);
+}
+
+.delete-interval {
+    flex-shrink: 0;
+    width: clamp(48px, 13vw, 64px);
+    height: clamp(48px, 13vw, 64px);
+    background: none;
+    border: none;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-interval svg {
+    width: clamp(28px, 7vw, 38px);
+    height: clamp(28px, 7vw, 38px);
+}
+
+.interval-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(18px, 5vw, 30px);
+}
+
+.interval-time {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: clamp(10px, 3vw, 18px);
+    border-bottom: clamp(3px, 1vw, 6px) solid var(--primary-lighter);
+}
+
+.less,
+.more {
+    flex-shrink: 0;
+    width: clamp(48px, 13vw, 72px);
+    height: clamp(48px, 13vw, 72px);
+    background-color: var(--primary);
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(7px, 2vw, 12px);
+    border-radius: 50%;
+}
+
+.less svg,
+.more svg {
+    width: 90%;
+    height: 90%;
+}
+
+.minutes,
+.seconds {
+    width: clamp(42px, 12vw, 72px);
+    background: none;
+    border: none;
+    text-align: center;
+    color: var(--header);
+    font-size: clamp(28px, 7vw, 44px);
+    font-weight: bold;
+    padding: 0;
+}
+
+.minutes:focus,
+.seconds:focus {
+    border: none;
+    outline: none;
+}
+
+.interval-time span {
+    color: var(--header);
+    font-size: clamp(28px, 7vw, 44px);
+    font-weight: bold;
+}
+
+.interval-params {
+    display: flex;
+    gap: clamp(8px, 2vw, 16px);
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+input[type="radio"]:checked + label {
+    background-color: var(--primary);
+    border-radius: clamp(18px, 3rem, 30px);
+}
+
+input[type="radio"]:checked + label path {
+    fill: var(--background);
+}
+
+label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.work label {
+    padding: clamp(20px, 8vw, 40px) clamp(14px, 4vw, 24px);
+}
+
+.rest label {
+    padding: clamp(18px, 7vw, 35px) clamp(16px, 5vw, 28px);
+}
+
+.work label svg {
+    width: clamp(40px, 13vw, 64px);
+    height: auto;
+}
+
+.rest label svg {
+    width: clamp(34px, 10vw, 54px);
+    height: auto;
+}
+
+.repeat {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: clamp(55px, 20vw, 90px);
+    height: clamp(55px, 20vw, 90px);
+}
+
+.repeat svg {
+    width: clamp(38px, 15vw, 64px);
+    height: auto;
+}
+
+.times {
+    position: absolute;
+    color: var(--primary-lighter);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: clamp(20px, 6vw, 32px);
+    background: none;
+    border: none;
+    width: clamp(30px, 8vw, 45px);
+    font-weight: bold;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.times:focus {
+    border: none;
+    outline: none;
+}
+
+.interval-card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: auto;
+}
+
+.move-interval {
+    position: relative;
+    width: clamp(48px, 13vw, 64px);
+    height: clamp(48px, 13vw, 64px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.move-interval-icon {
+    width: clamp(25px, 7vw, 32px);
+    height: auto;
+    pointer-events: none;
+}
+
+.move-select {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.move-select option {
+    color: var(--header);
+    background-color: var(--background);
+    font-weight: 600;
+}
+
+.add-interval {
+    position: relative;
+    width: clamp(48px, 13vw, 64px);
+    height: clamp(48px, 13vw, 64px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--primary);
+}
+
+.add-interval svg {
+    width: clamp(24px, 7vw, 34px);
+    height: clamp(24px, 7vw, 34px);
+    pointer-events: none;
+}
+
+.add-select {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.add-select option {
+    color: var(--header);
+    background-color: var(--background);
+    font-weight: 600;
+}
+
+#page-bottom {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    left: max(20px, 8vw);
+    right: max(20px, 8vw);
+    bottom: max(20px, 5vw);
+    padding-bottom: env(safe-area-inset-bottom);
+    z-index: 1000;
+    pointer-events: none;
+}
+
+#page-bottom button {
+    pointer-events: auto;
+}
+
+#create-timer,
+#add-interval {
+    width: clamp(64px, 18vw, 90px);
+    height: clamp(64px, 18vw, 90px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+}
+
+#create-timer {
+    background-color: var(--primary);
+}
+
+#add-interval {
+    background-color: var(--background-darker);
+}
+
+#add-interval svg {
+    width: 55%;
+    height: 55%;
+}
+
+#add-interval svg rect {
+    fill: var(--primary);
+}
+
+#create-timer svg {
+    width: 45%;
+    height: 45%;
+    object-fit: contain;
+}
+
+#modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999999;
+    backdrop-filter: blur(4px);
+}
+
+#modal-content {
+    position: relative;
+    width: min(90vw, 520px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background);
+    padding: clamp(35px, 10vw, 55px) clamp(20px, 5vw, 35px);
+    border-radius: clamp(25px, 10vw, 50px);
+}
+
+#close-modal {
+    position: absolute;
+    top: clamp(12px, 5vw, 25px);
+    right: clamp(12px, 5vw, 25px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    outline: none;
+    border: none;
+    padding: 0;
+}
+
+#close-modal svg {
+    width: clamp(32px, 12vw, 48px);
+    height: clamp(32px, 12vw, 48px);
+}
+
+#close-modal svg path {
+    stroke: var(--header);
+    stroke-width: clamp(1.5px, 1vw, 3px);
+}
+
+#modal-content p {
+    color: var(--header);
+    font-size: clamp(22px, 8vw, 40px);
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+}
+
+#timer-name {
+    margin-top: clamp(20px, 6vw, 32px);
+    width: 100%;
+    text-align: center;
+    font-size: clamp(20px, 7vw, 34px);
+    background: var(--background-darker);
+    border: 2px solid var(--primary);
+    border-radius: clamp(16px, 5vw, 26px);
+    color: var(--header);
+    font-weight: bold;
+    padding: clamp(14px, 5vw, 24px);
+}
+
+#timer-name:focus {
+    outline: none;
+    border-color: var(--primary-lighter);
+}
+
+#confirm {
+    background-color: var(--primary);
+    margin-top: clamp(20px, 6vw, 32px);
+    font-size: clamp(18px, 5vw, 26px);
+    padding: clamp(12px, 4vw, 18px) clamp(28px, 8vw, 42px);
+    border-radius: 3rem;
+    font-weight: bold;
+    border: none;
+    color: var(--background);
+    cursor: pointer;
+    transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+#confirm:active {
+    transform: scale(0.95);
+}
+
+@media (orientation: portrait) {
+    #modal-content {
+        padding-top: clamp(55px, 14vw, 75px);
+    }
+
+    #modal-content p {
+        max-width: 95%;
+    }
+}
+
+@media (min-width: 600px) and (orientation: portrait) {
+    #intervals {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .interval {
+        width: min(100%, 520px);
+        padding: 30px 40px;
+    }
+
+    #page-bottom {
+        left: 6vw;
+        right: 6vw;
+    }
+}
+
+@media (min-width: 768px) and (orientation: portrait) {
+    #intervals {
+        width: 100%;
+    }
+
+    .interval {
+        width: min(100%, 560px);
+        border-radius: 32px;
+    }
+
+    #page-bottom {
+        left: 7vw;
+        right: 7vw;
+        bottom: 30px;
+    }
+
+    #create-timer,
+    #add-interval {
+        width: 82px;
+        height: 82px;
+    }
+}
+
+@media (orientation: landscape) {
+    body {
+        padding-bottom: 90px;
+    }
+
+    nav {
+        padding-top: max(12px, 2vh);
+        padding-bottom: max(12px, 2vh);
+    }
+
+    nav div {
+        font-size: clamp(18px, 4vh, 28px);
+    }
+
+    #back svg {
+        width: clamp(26px, 6dvh, 38px);
+        height: clamp(26px, 6dvh, 38px);
+    }
+
+    #title {
+        font-size: clamp(18px, 4vh, 28px);
+        width: min(40vw, 350px);
+    }
+
+    #timer-info {
+        padding-top: 2vh;
+        font-size: clamp(22px, 6vh, 38px);
+    }
+
+    #intervals {
+        width: 100%;
+        padding: 3vh 4vw 30px;
+        gap: 3vh;
+    }
+
+    .interval {
+        width: min(82vw, 400px);
+        padding: 3vh 3vw;
+        border-radius: clamp(20px, 5vh, 32px);
+        gap: 3vh;
+    }
+
+    .interval-name {
+        font-size: clamp(22px, 6vh, 38px);
+    }
+
+    .interval-bottom {
+        gap: 3vh;
+    }
+
+    .interval-time {
+        padding-bottom: 1.5vh;
+    }
+
+    .minutes,
+    .seconds,
+    .interval-time span {
+        font-size: clamp(24px, 6vh, 38px);
+    }
+
+    .less,
+    .more {
+        width: clamp(48px, 10vh, 64px);
+        height: clamp(48px, 10vh, 64px);
+    }
+
+    .work label {
+        padding: 3vh 2vw;
+    }
+
+    .rest label {
+        padding: 2.5vh 2.5vw;
+    }
+
+    .work label svg {
+        width: clamp(40px, 12vh, 58px);
+    }
+
+    .rest label svg {
+        width: clamp(34px, 10vh, 50px);
+    }
+
+    .repeat {
+        width: clamp(50px, 15vh, 70px);
+        height: clamp(50px, 15vh, 70px);
+    }
+
+    .repeat svg {
+        width: clamp(36px, 11vh, 52px);
+    }
+
+    .times {
+        font-size: clamp(18px, 5vh, 28px);
+    }
+
+    .move-interval {
+        width: clamp(48px, 10vh, 64px);
+        height: clamp(48px, 10vh, 64px);
+    }
+
+    .add-interval {
+        width: clamp(48px, 10vh, 64px);
+        height: clamp(48px, 10vh, 64px);
+    }
+
+    #page-bottom {
+        left: 5vw;
+        right: 5vw;
+        bottom: max(12px, 3vh);
+    }
+
+    #create-timer,
+    #add-interval {
+        width: clamp(58px, 15vh, 76px);
+        height: clamp(58px, 15vh, 76px);
+    }
+
+    #modal {
+        padding: 16px;
+    }
+
+    #modal-content {
+        width: min(75vw, 520px);
+        padding: clamp(24px, 6dvh, 40px) clamp(20px, 4vw, 32px);
+        border-radius: clamp(20px, 5dvh, 32px);
+    }
+
+    #close-modal {
+        top: clamp(8px, 2dvh, 14px);
+        right: clamp(8px, 2dvh, 14px);
+    }
+
+    #close-modal svg {
+        width: clamp(28px, 6dvh, 38px);
+        height: clamp(28px, 6dvh, 38px);
+    }
+
+    #modal-content p {
+        font-size: clamp(18px, 5dvh, 28px);
+        max-width: 90%;
+    }
+
+    #timer-name {
+        margin-top: clamp(12px, 3dvh, 20px);
+        font-size: clamp(17px, 4dvh, 24px);
+        padding: clamp(10px, 3dvh, 16px);
+        border-radius: clamp(14px, 4dvh, 22px);
+    }
+
+    #confirm {
+        margin-top: clamp(12px, 3dvh, 20px);
+        font-size: clamp(16px, 4dvh, 22px);
+        padding: clamp(10px, 2.5dvh, 14px) clamp(24px, 5vw, 36px);
+    }
+}
+
+@media (min-width: 1000px) {
+    #intervals {
+        width: 100%;
+    }
+
+    .interval {
+        width: min(100%, 560px);
+    }
+
+    #page-bottom {
+        left: max(30px, calc((100vw - 900px) / 2));
+        right: max(30px, calc((100vw - 900px) / 2));
+    }
+}
