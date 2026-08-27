@@ -48,13 +48,17 @@ pulse/
 ## Screenshots
 
 ### Auth
-![Auth](./screenshots/auth.jpg)
+
+<img src="./screenshots/auth-page.jpg" width="300">
 
 ### Loading Page
-![Loading Page](./screenshots/loading-page.jpg)
+
+<img src="./screenshots/loading-page.jpg" width="300">
 
 ### Timer
-![Timer](./screenshots/timer.jpg)
+
+<img src="./screenshots/timer-pagejpg" width="300">
 
 ### Timer List
-![Timer List](./screenshots/timer-list.jpg)
+
+<img src="./screenshots/timer-list-page.jpg" width="300">
