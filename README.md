@@ -43,6 +43,7 @@ pulse/
 ├── .gitignore
 ├── .env
 └── README.md
+```
 
 ## Screenshots
 
