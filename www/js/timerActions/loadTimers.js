@@ -26,7 +26,7 @@ export function loadTimers() {
             interval => interval.type == Type.REST
         ).reduce((acc, i) => acc + i.duration, 0))
 
-        let totalTime = msToMinSec(timer.intervals.reduce((acc, i) => acc + i.duration, 0))
+        let totalTime = msToMinSec(timer.intervals.reduce((acc, i) => acc + i.duration * i.repeat, 0))
 
         document.querySelector("#timers").innerHTML += `
             <div class="timer" id="t${timer.id}">
