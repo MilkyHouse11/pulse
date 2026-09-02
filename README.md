@@ -22,7 +22,6 @@ Pulse is a customizable interval timer for workouts and other time-based routine
 - CSS
 - JavaScript
 - Capacitor
-- Android
 - Python
 - DRF
 - Capacitor Haptics
